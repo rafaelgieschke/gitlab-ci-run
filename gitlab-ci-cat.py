@@ -34,7 +34,7 @@ for name, job in gitlab_ci.items():
             script = "\n".join(
                 exports
                 + job.get("before_script", gitlab_ci.get("before_script", []))
-                + job["script"]
+                + ([job["script"]] if isinstance(job["script"], str) else job["script"])
             )
             if job_nr > 0:
                 print()
